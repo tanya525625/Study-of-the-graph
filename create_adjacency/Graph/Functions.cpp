@@ -91,14 +91,14 @@ void create_adjList(int nodes_count, int** adj_matrix)
 	if (!fout_adjList.is_open())
 		cout << "File for writing of adjacency list wasn't opened" << endl;
 	else
-	{
+	{ 
 		for (int i = 0; i < nodes_count; i++) 
-		{
+		{	
 			fout_adjList << nodes_list[i] << ": ";
 			for (int j = 0; j < nodes_count; j++) 
 			{
-				if (adj_matrix[i][j] == 1) 
-					fout_adjList << nodes_list[j] << " ";
+				if (adj_matrix[i][j] == 1)
+					fout_adjList << nodes_list[j] << " ";	
 			}
 			fout_adjList << endl;
 		}
