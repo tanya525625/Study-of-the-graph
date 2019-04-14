@@ -118,6 +118,7 @@
     <None Include="..\..\..\..\Desktop\Test2376.csv" />
     <None Include="Edges.csv" />
     <None Include="Nodes.csv" />
+    <None Include="undGraphEdges.csv" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Functions.cpp" />

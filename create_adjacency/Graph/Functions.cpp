@@ -23,7 +23,7 @@ int* create_nodesList(int nodes_count)
 // Function for creating adjacency_matrix
 int** create_adjMatrix(int nodes_count, int edges_count)
 {
-	ifstream fin_edges("edges.csv");
+	ifstream fin_edges("undGraphEdges.csv");
 	int* nodes_list = new int[nodes_count]; // Initialization
 	nodes_list = create_nodesList(nodes_count); 
 	int** matrix = new int*[nodes_count];
@@ -62,7 +62,7 @@ int** create_adjMatrix(int nodes_count, int edges_count)
 	}
 	fin_edges.close();
 
-	ofstream fout_adjMatrix("adjacency_matrix.csv"); // Writing to the file
+	ofstream fout_adjMatrix("adjacency_matrix_of_undGraph.csv"); // Writing to the file
 	if (!fout_adjMatrix.is_open())
 		cout << "File for writing of adjacency_matrix wasn't opened" << endl;
 	else
@@ -87,7 +87,7 @@ void create_adjList(int nodes_count, int** adj_matrix)
 	int* nodes_list = new int[nodes_count];
 	nodes_list = create_nodesList(nodes_count);
 
-	ofstream fout_adjList("adjacency_list.csv"); // // Writing to the file
+	ofstream fout_adjList("adjacency_list_of_undGraph.csv"); // // Writing to the file
 	if (!fout_adjList.is_open())
 		cout << "File for writing of adjacency list wasn't opened" << endl;
 	else

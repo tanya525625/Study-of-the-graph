@@ -19,5 +19,6 @@ public:
 	Matrix makeBoolean();
 	friend void writingToFile(Matrix A);
 	friend void ifStronglyConnected(Matrix S);
+	friend void find_strongConnectivityComponents(Matrix S);
 };
 

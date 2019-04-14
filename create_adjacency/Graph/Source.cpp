@@ -3,7 +3,7 @@
 int main()
 {
 	const int nodes_count = 51; // number of nodes
-	const int edges_count = 331; // number of edges
+	const int edges_count = 338; // number of edges
 	int** adj_matrix = new int*[nodes_count];
 	for (int i = 0; i < nodes_count; i++)
 		adj_matrix[i] = new int[nodes_count];
