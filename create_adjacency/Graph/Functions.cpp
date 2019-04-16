@@ -1,10 +1,10 @@
 #include "Header.h"
 
 // Function for creating a list of all nodes
-int* create_nodesList(int nodes_count) 
+int* create_nodesList(int nodes_count, string file_name) 
 {
 	int* nodes_list = new int[nodes_count]; // // Initialization
-	ifstream fin_nodes("nodes.csv");
+	ifstream fin_nodes(file_name);
 	if (!fin_nodes.is_open())
 		cout << "File with list of nodes wasn't opened";
 	else
@@ -21,11 +21,12 @@ int* create_nodesList(int nodes_count)
 }
 
 // Function for creating adjacency_matrix
-int** create_adjMatrix(int nodes_count, int edges_count)
+int** create_adjMatrix(int nodes_count, int edges_count, string nodes_file_name, string edges_file_name,
+						string output_adj_matrix_file_name)
 {
-	ifstream fin_edges("undGraphEdges.csv");
+	ifstream fin_edges(edges_file_name);
 	int* nodes_list = new int[nodes_count]; // Initialization
-	nodes_list = create_nodesList(nodes_count); 
+	nodes_list = create_nodesList(nodes_count, nodes_file_name);
 	int** matrix = new int*[nodes_count];
 	for (int i = 0; i < nodes_count; i++)
 		matrix[i] = new int[nodes_count];
@@ -62,7 +63,7 @@ int** create_adjMatrix(int nodes_count, int edges_count)
 	}
 	fin_edges.close();
 
-	ofstream fout_adjMatrix("adjacency_matrix_of_undGraph.csv"); // Writing to the file
+	ofstream fout_adjMatrix(output_adj_matrix_file_name); // Writing to the file
 	if (!fout_adjMatrix.is_open())
 		cout << "File for writing of adjacency_matrix wasn't opened" << endl;
 	else
@@ -82,12 +83,13 @@ int** create_adjMatrix(int nodes_count, int edges_count)
 	return matrix;
 }
 
-void create_adjList(int nodes_count, int** adj_matrix)
+// Function for creating adjacency_list
+void create_adjList(int nodes_count, int** adj_matrix, string nodes_file_name, string output_adj_list_file_name)
 {
 	int* nodes_list = new int[nodes_count];
-	nodes_list = create_nodesList(nodes_count);
+	nodes_list = create_nodesList(nodes_count, nodes_file_name);
 
-	ofstream fout_adjList("adjacency_list_of_undGraph.csv"); // // Writing to the file
+	ofstream fout_adjList(output_adj_list_file_name); // // Writing to the file
 	if (!fout_adjList.is_open())
 		cout << "File for writing of adjacency list wasn't opened" << endl;
 	else
@@ -103,6 +105,106 @@ void create_adjList(int nodes_count, int** adj_matrix)
 			fout_adjList << endl;
 		}
 		fout_adjList.close();
-		cout << "The creating and writing of adjacency list is completed" << endl;
+		cout << "The creating and writing adjacency list is completed" << endl;
 	}
+}
+
+void makeNewGraph(int nodes_count, int edges_count, int max_component_nodes_count, string nodes_file_name, string edges_file_name,
+			string max_component_nodes_file_name, string output_max_component_edges)
+{
+	//int* nodes_list = new int[nodes_count]; // Initialization
+	//nodes_list = create_nodesList(nodes_count, nodes_file_name);
+	int* max_component_nodes_list = new int[max_component_nodes_count]; 
+	max_component_nodes_list = create_nodesList(nodes_count, max_component_nodes_file_name);
+	ifstream fin(edges_file_name);
+	ofstream fout(output_max_component_edges); // Writing to the file
+	if (!fout.is_open())
+		cout << "File for writing edges of the graph's max component wasn't opened" << endl;
+	else
+	{
+		int source;
+		int target;
+		int pre_source;
+		int pre_target;
+		int i = 0;
+		int j = 0; 
+		bool isAdded = 0;
+		while (j < edges_count)
+		{
+			if (i > nodes_count)
+				i = nodes_count - 1;
+			fin >> source;
+			fin >> target;
+			j++;
+			//cout << max_component_nodes_list[i] << endl;
+			cout << source << " ";
+			cout << max_component_nodes_list[i] << endl;
+			if (source == max_component_nodes_list[i])
+			{
+				if (i > nodes_count)
+					i = nodes_count - 1;
+				fout << source << " ";
+				fout << target << endl;
+				while (source == max_component_nodes_list[i] and j < edges_count)
+				{
+					if (i > nodes_count)
+						i = nodes_count - 1;
+					fin >> source;
+					fin >> target;
+					pre_source = source;
+					pre_target = target;
+					cout << source << " ";
+					cout << max_component_nodes_list[i] << endl;
+					j++;
+					if (source == max_component_nodes_list[i])
+					{
+						fout << source << " ";
+						fout << target << endl;
+						pre_source = source;
+						pre_target = target;
+					}
+					else
+					{
+						i++;
+						if (pre_source == max_component_nodes_list[i])
+						{
+							//i++;
+							//cout << max_component_nodes_list[i + 1] << endl;
+							fout << pre_source << " ";
+							fout << pre_target << endl;
+						}
+					}
+				}
+				isAdded = 1;
+
+			}
+			/*else
+			{ */
+			//	//i++;
+			//	if (isAdded == 1)
+			//	{
+			//		i++;	
+			//		isAdded = 0;
+			//	}
+			//	if (pre_source == max_component_nodes_list[i+1])
+			//	{
+			//		i++;
+			//		//cout << max_component_nodes_list[i + 1] << endl;
+			//		fout << pre_source << " ";
+			//		fout << pre_target << endl;
+			//	}
+			//	if (source == max_component_nodes_list[i])
+			//	{
+			//		i++;
+			//		//cout << max_component_nodes_list[i + 1] << endl;
+			//		fout << source << " ";
+			//		fout << target << endl;
+			//	}
+			//}
+		/*}*/
+		}
+		fout.close();
+		cout << "The creating and writing of new graph's max component is completed" << endl;
+	}
+
 }

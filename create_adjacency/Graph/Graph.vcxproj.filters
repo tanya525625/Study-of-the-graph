@@ -24,6 +24,12 @@
     <None Include="Nodes.csv">
       <Filter>Файлы ресурсов</Filter>
     </None>
+    <None Include="Edges(maxComponent).csv">
+      <Filter>Файлы ресурсов</Filter>
+    </None>
+    <None Include="nodes(maxComponent).csv">
+      <Filter>Файлы ресурсов</Filter>
+    </None>
     <None Include="undGraphEdges.csv">
       <Filter>Файлы ресурсов</Filter>
     </None>
