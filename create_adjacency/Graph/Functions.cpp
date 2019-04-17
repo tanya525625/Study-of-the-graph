@@ -136,9 +136,6 @@ void makeNewGraph(int nodes_count, int edges_count, int max_component_nodes_coun
 			fin >> source;
 			fin >> target;
 			j++;
-			//cout << max_component_nodes_list[i] << endl;
-			cout << source << " ";
-			cout << max_component_nodes_list[i] << endl;
 			if (source == max_component_nodes_list[i])
 			{
 				if (i > nodes_count)
@@ -153,8 +150,6 @@ void makeNewGraph(int nodes_count, int edges_count, int max_component_nodes_coun
 					fin >> target;
 					pre_source = source;
 					pre_target = target;
-					cout << source << " ";
-					cout << max_component_nodes_list[i] << endl;
 					j++;
 					if (source == max_component_nodes_list[i])
 					{
@@ -168,40 +163,12 @@ void makeNewGraph(int nodes_count, int edges_count, int max_component_nodes_coun
 						i++;
 						if (pre_source == max_component_nodes_list[i])
 						{
-							//i++;
-							//cout << max_component_nodes_list[i + 1] << endl;
 							fout << pre_source << " ";
 							fout << pre_target << endl;
 						}
 					}
 				}
-				isAdded = 1;
-
 			}
-			/*else
-			{ */
-			//	//i++;
-			//	if (isAdded == 1)
-			//	{
-			//		i++;	
-			//		isAdded = 0;
-			//	}
-			//	if (pre_source == max_component_nodes_list[i+1])
-			//	{
-			//		i++;
-			//		//cout << max_component_nodes_list[i + 1] << endl;
-			//		fout << pre_source << " ";
-			//		fout << pre_target << endl;
-			//	}
-			//	if (source == max_component_nodes_list[i])
-			//	{
-			//		i++;
-			//		//cout << max_component_nodes_list[i + 1] << endl;
-			//		fout << source << " ";
-			//		fout << target << endl;
-			//	}
-			//}
-		/*}*/
 		}
 		fout.close();
 		cout << "The creating and writing of new graph's max component is completed" << endl;
