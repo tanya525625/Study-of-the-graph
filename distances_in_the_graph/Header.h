@@ -16,4 +16,4 @@ int* create_nodesList(int nodes_count);
 void findCentralNodes(Matrix eccentricities, int r);
 void findPeripheralNodes(Matrix eccentricities, int d);
 double avgLength(Matrix distMatrix);
-int* create_nodes_power_list(int nodes_count, string adj_list_file_name);
+double* create_nodes_power_list(int nodes_count, string adj_list_file_name);

@@ -121,7 +121,7 @@ double avgLength(Matrix distMatrix)
 	return avgLength;
 }
 
-int* create_nodes_power_list(int nodes_count, string adj_list_file_name)
+double* create_nodes_power_list(int nodes_count, string adj_list_file_name)
 {
 	ifstream fin(adj_list_file_name);
 	int curr_node; // current node from the file
@@ -146,8 +146,8 @@ int* create_nodes_power_list(int nodes_count, string adj_list_file_name)
 		pow = 0;
 	}
 
-	int* power_list = new int[max_pow];
-	for (int i = 0; i < max_pow; i++)
+	double* power_list = new double[max_pow+1];
+	for (int i = 0; i < max_pow + 1; i++)
 	{
 		power_list[i] = 0;
 	}
@@ -155,14 +155,18 @@ int* create_nodes_power_list(int nodes_count, string adj_list_file_name)
 	{									   // with current power (index of array)
 		power_list[temp_power_list[i]] += 1;
 	}
+	for (int i = 0; i < max_pow + 1; i++)
+	{
+		power_list[i] /= nodes_count;
+	}
 
 	cout << "Power list:  " << endl;
-	for (int i = 0; i < max_pow; i++)
+	for (int i = 0; i < max_pow + 1; i++)
 	{
 		cout << i << "\t";
 	}
 	cout << endl;
-	for (int i = 0; i < max_pow; i++)
+	for (int i = 0; i < max_pow + 1; i++)
 	{
 		cout << power_list[i] << "\t";
 	}
