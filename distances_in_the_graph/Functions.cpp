@@ -5,8 +5,13 @@ Matrix create_distance_matrix(int nodes_count)
 	Matrix adj_matrix(nodes_count, nodes_count, true);
 	for (int i = 0; i < nodes_count; i++)
 		for (int j = 0; j < nodes_count; j++)
+		{
 			if (adj_matrix.matrix[i][j] == 0)
 				adj_matrix.matrix[i][j] = nodes_count;
+			if (i == j)
+				adj_matrix.matrix[i][j] = 0;
+		}
+			
 	for (int k = 0; k < nodes_count; k++)
 		for (int i = 0; i < nodes_count; i++)
 			for (int j = 0; j < nodes_count; j++)
@@ -114,4 +119,54 @@ double avgLength(Matrix distMatrix)
 			avgLength += distMatrix.matrix[i][j];
 	avgLength = avgLength / (distMatrix.n*distMatrix.n);
 	return avgLength;
+}
+
+int* create_nodes_power_list(int nodes_count, string adj_list_file_name)
+{
+	ifstream fin(adj_list_file_name);
+	int curr_node; // current node from the file
+	int* temp_power_list = new int[nodes_count];
+	string curr_row; // current row from the file
+	int pow = 0; // power of the current node
+	int max_pow = 0;
+	char c; // curr char from file
+	for (int i = 0; i < nodes_count; i++)
+	{
+		fin >> curr_node;
+		getline(fin, curr_row, '\n');
+		int curr_row_size = curr_row.size();
+		for (int j = 0; j < curr_row_size; j++)
+			if (curr_row[j] == ' ') 
+				pow++;
+		
+		pow -= 1; // there is an extra space after reading the first node
+		temp_power_list[i] = pow;
+		if (pow > max_pow)
+			max_pow = pow;
+		pow = 0;
+	}
+
+	int* power_list = new int[max_pow];
+	for (int i = 0; i < max_pow; i++)
+	{
+		power_list[i] = 0;
+	}
+	for (int i = 0; i < nodes_count; i++)  // creating array, where values are count of the nodes 
+	{									   // with current power (index of array)
+		power_list[temp_power_list[i]] += 1;
+	}
+
+	cout << "Power list:  " << endl;
+	for (int i = 0; i < max_pow; i++)
+	{
+		cout << i << "\t";
+	}
+	cout << endl;
+	for (int i = 0; i < max_pow; i++)
+	{
+		cout << power_list[i] << "\t";
+	}
+	cout << endl;
+
+	return power_list;
 }

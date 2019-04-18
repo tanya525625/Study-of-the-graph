@@ -6,6 +6,7 @@ int main()
 	string adj_matrix_file_name = "adjacency_matrix_of_subgraph.csv";
 	string output_dist_matrix_file_name = "distance_matrix.csv";
 	string nodes_file_name = "nodes(maxComponent).csv";
+	string adj_list_file_name = "adjacency_list_of_subGraph.csv";
 	const int nodes_count = 25;
 	const int edges_count = 204;
 	Matrix dist_matrix(nodes_count, edges_count, true);
@@ -21,6 +22,8 @@ int main()
 	findPeripheralNodes(eccentricities, diameter);
 	double avg_length = avgLength(dist_matrix);
 	cout << "The average length is " << avg_length << endl;
+	create_nodes_power_list(nodes_count, adj_list_file_name);
+
 	system("pause");
 	return 0;
 }
