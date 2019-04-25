@@ -1,9 +1,10 @@
 #include "Header.h"
 
-Matrix::Matrix(int _n, int _m, bool isRead)
+Matrix::Matrix(int _n, int _m, char* file_name)
 {
 	n = _n; m = _m;
-	ifstream fin("adjacency_matrix_of_subgraph.csv");
+	
+	ifstream fin(file_name);
 	if (!fin.is_open())
 	{
 		cout << "File wasn't opened" << endl;
@@ -18,13 +19,24 @@ Matrix::Matrix(int _n, int _m, bool isRead)
 
 		for (int i = 0; i < n; i++)
 			for (int j = 0; j < m; j++)
-				if (isRead == 1)
 					fin >> matrix[i][j];
-				else
-					matrix[i][j] = 0;
 
 		fin.close();
 	}
+}
+
+Matrix::Matrix(int _n, int _m)
+{
+	n = _n; m = _m;
+	matrix = new double*[n];
+	for (int i = 0; i < n; i++)
+	{
+		matrix[i] = new double[m];
+	}
+
+	for (int i = 0; i < n; i++)
+		for (int j = 0; j < m; j++)
+			matrix[i][j] = 0;
 }
 
 Matrix::~Matrix()
