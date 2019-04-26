@@ -155,6 +155,18 @@ double* create_nodes_power_list(int nodes_count, string adj_list_file_name)
 	{									   // with current power (index of array)
 		power_list[temp_power_list[i]] += 1;
 	}
+
+	double avg_node_degree = 0;
+
+	// finding avg_node_degree
+	for (int i = 0; i < max_pow + 1; i++)
+	{
+		avg_node_degree += i * power_list[i];
+	}
+	avg_node_degree /= nodes_count;
+
+	cout << "The average nodes' degree is " << avg_node_degree << endl;
+
 	for (int i = 0; i < max_pow + 1; i++)
 	{
 		power_list[i] /= nodes_count;
@@ -172,5 +184,6 @@ double* create_nodes_power_list(int nodes_count, string adj_list_file_name)
 	}
 	cout << endl;
 
+	
 	return power_list;
 }

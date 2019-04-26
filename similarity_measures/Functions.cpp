@@ -1,22 +1,24 @@
 #include "Header.h"
 
+// finding of common neighbors
 Matrix find_common_neighbors(Matrix adj_matrix)
 {
 	int n = adj_matrix.n; // nodes' count
 	Matrix s(n, n, false); // matrix of common neighbors' count 
-	int row1_index = 0;
-	int row2_index = 0;
+	int row1_index = 0; // the first current row
+	int row2_index = 0; // the second current row
 	int k = 0; // number of viewed nodes 
-	while ((row1_index < n) and (row2_index < n))
+	while ((row1_index < n) and (row2_index < n)) 
 	{
 		for (int j = 0; j < n; j++)
-		{
+		{   
+			// if neighbours are common 
 			if ((adj_matrix.matrix[row1_index][j] == adj_matrix.matrix[row2_index][j]) and (adj_matrix.matrix[row1_index][j] == 1))
 			{
 				s.matrix[row1_index][row2_index] += 1;
 			}
 		}
-		
+		// if rows for comparison were all reviewed for current line
 		if (row2_index == n - 1)
 		{
 			k++;
@@ -28,6 +30,7 @@ Matrix find_common_neighbors(Matrix adj_matrix)
 	return s;
 }
 
+// finding union neighbors
 Matrix find_union_neighbors(Matrix adj_matrix)
 {
 	int n = adj_matrix.n; // nodes' count;
@@ -39,12 +42,14 @@ Matrix find_union_neighbors(Matrix adj_matrix)
 	while ((row1_index < n) and (row2_index < n))
 	{
 		for (int j = 0; j < n; j++)
-		{
+		{   
+			// If at least one of the lines is a neighbor
 			if ((adj_matrix.matrix[row1_index][j] == 1) or (adj_matrix.matrix[row2_index][j] == 1))
 			{
 				s.matrix[row1_index][row2_index] += 1;
 			}
 		}
+		// if rows for comparison were all reviewed for current line
 		if (row2_index == n - 1)
 		{
 			k++;
@@ -57,6 +62,7 @@ Matrix find_union_neighbors(Matrix adj_matrix)
 	return s;
 }
 
+// finding Jaccard’s Coefficient
 Matrix find_Jaccard_coeff(Matrix adj_matrix)
 {
 	int n = adj_matrix.n; // nodes' count;
@@ -71,6 +77,7 @@ Matrix find_Jaccard_coeff(Matrix adj_matrix)
 	return s;
 }
 
+// count of the neighbors
 Matrix neighbors_count(Matrix adj_matrix)
 {
 	int n = adj_matrix.n; // nodes' count;
@@ -83,6 +90,7 @@ Matrix neighbors_count(Matrix adj_matrix)
 	return neighbours_count;
 }
 
+//  finding preferential attachment
 Matrix preferential_attachment(Matrix adj_matrix)
 {
 	int n = adj_matrix.n; // nodes' count;
@@ -94,15 +102,10 @@ Matrix preferential_attachment(Matrix adj_matrix)
 		for (int j = 0; j < n; j++)
 			s.matrix[i][j] = neighbors_count_matr.matrix[0][i] * neighbors_count_matr.matrix[0][j];
 
-
-	//for (int i = 0; i < n; i++)
-	//{
-
-	//	cout << neighbors_count_matr.matrix[0][i] << endl;
-	//}
 	return s;
 }
 
+// finding frequency-weighted common neighbors
 Matrix frequency_weighted_common_neighbors(Matrix adj_matrix)
 {
 	int n = adj_matrix.n; // nodes' count;
@@ -122,7 +125,7 @@ Matrix frequency_weighted_common_neighbors(Matrix adj_matrix)
 				s.matrix[row1_index][row2_index] += round(1/log(neighbours_count_matr.matrix[0][j])*1000)/1000;
 			}
 		}
-
+		// if rows for comparison were all reviewed for current line
 		if (row2_index == n - 1)
 		{
 			k++;

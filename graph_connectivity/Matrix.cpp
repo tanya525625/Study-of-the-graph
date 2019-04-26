@@ -44,6 +44,7 @@ void Matrix::print()
 
 }
 
+//multiplication of two matrices
 Matrix operator *(Matrix &a1, Matrix &a2)
 {
 	Matrix res(a1.n, a2.m, 0);
@@ -69,7 +70,8 @@ Matrix operator *(Matrix &a1, Matrix &a2)
 	return res;
 }
 
-Matrix Matrix::add (Matrix a1, Matrix a2) // addition
+// addition of two matrices
+Matrix Matrix::add (Matrix a1, Matrix a2)
 {
 	Matrix res(a1.n, a2.m, 0);
 
@@ -90,6 +92,7 @@ Matrix Matrix::add (Matrix a1, Matrix a2) // addition
 	return res;
 }
 
+// pow of the matrix
 Matrix Matrix::pow(Matrix A, int k)
 {
 	Matrix res = createIdentArr(A.n);
@@ -100,6 +103,7 @@ Matrix Matrix::pow(Matrix A, int k)
 	return res;
 }
 
+// creating an identity matrix
 Matrix Matrix::createIdentArr(int n)
 {
 	Matrix identArr(n, n, 0);
@@ -120,6 +124,7 @@ Matrix Matrix::transpose()
 	return tmpMatrix;
 }
 
+// elementwise multiplication of two matrices
 Matrix Matrix::elemMultiplication(Matrix a1, Matrix a2)
 {
 	Matrix res(n, m, 0);
@@ -129,6 +134,7 @@ Matrix Matrix::elemMultiplication(Matrix a1, Matrix a2)
 	return res;
 }
 
+// creating a binary matrix
 Matrix Matrix::makeBoolean()
 {
 	Matrix res(n, m, 0);

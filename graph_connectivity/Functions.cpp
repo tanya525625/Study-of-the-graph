@@ -20,6 +20,8 @@ int* create_nodesList(int nodes_count)
 	return nodes_list;
 }
 
+// creating a reachability matrix
+
 Matrix create_reachabilityMatrix(Matrix adjMatrix)
 {
 	Matrix T(adjMatrix.n, adjMatrix.m, 0); // creating a reachability matrix
@@ -58,14 +60,15 @@ void writingToFile(Matrix A)
 	}
 }
 
-void ifStronglyConnected(Matrix S)
+// is the graph strongly connected
+void ifStronglyConnected(Matrix S) 
 {
 	bool isStronglyConnected = 1;
-	for (int i = 0; i < S.n; i++)
+	for (int i = 0; i < S.n; i++) 
 		for (int j = 0; j < S.m; j++)
-			if (S.matrix[i][j] == 0)
-			{
-				isStronglyConnected = 0;
+			if (S.matrix[i][j] == 0) // If there is at least one element equal to 0 
+			{						// then the graph is not strongly connected
+				isStronglyConnected = 0; 
 				break;
 			}
 	if (isStronglyConnected == 1)
@@ -96,8 +99,8 @@ void find_strongConnectivityComponents(Matrix S)
 			c = 0;
 			for (int j = 0; j < S.m; j++)
 			{
-				if ((S.matrix[i][j] == 1) and (addedNodes[j] == 0))
-				{
+				if ((S.matrix[i][j] == 1) and (addedNodes[j] == 0)) // If the node has not been added
+				{													// and it imparts a strong connectivity component
 					fout << nodesList[j] << " ";
 					addedNodes[j] = 1;
 					k++;
