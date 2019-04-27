@@ -13,5 +13,6 @@ public:
 	void print_to_file(char* file_name);
 	friend Matrix degree_centrality(Matrix adj_matr);
 	friend Matrix closeness_centrality(Matrix adj_matr);
-	friend Matrix betweenness_centrality(Matrix dist_matr);
+	//friend Matrix betweenness_centrality(Matrix dist_matr);
+	//friend Matrix eigenvector_centrality(Matrix adj_matrix);
 };

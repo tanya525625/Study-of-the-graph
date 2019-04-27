@@ -2,6 +2,9 @@
 #include <iostream>
 #include <fstream>
 #include "Matrix.h"
+#include <queue>
+#include <stack>
+#include <list>
 
 using namespace std;
 

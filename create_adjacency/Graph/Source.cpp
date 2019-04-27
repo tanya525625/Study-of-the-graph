@@ -2,13 +2,13 @@
 
 int main()
 {
-	const int nodes_count = 25; // number of nodes
-	const int edges_count = 204; // number of edges
+	const int nodes_count = 51; // number of nodes
+	const int edges_count = 331; // number of edges
 	const int max_component_nodes_count = 25;
-	string nodes_file_name = "nodes(maxComponent).csv";
-	string edges_file_name = "edges(maxComponent).csv";
-	string output_adj_matrix_file_name = "adjacency_matrix_of_subgraph.csv";
-	string output_adj_list_file_name = "adjacency_list_of_subGraph.csv";
+	string nodes_file_name = "nodes.csv";
+	string edges_file_name = "edges.csv";
+	string output_adj_matrix_file_name = "adjacency_matrix.csv";
+	string output_adj_list_file_name = "adjacency_list.csv";
 	string max_component_nodes_file_name = "nodes(maxComponent).csv";
 	string output_max_component_edges = "edges(maxComponent).csv";
 	int** adj_matrix = new int*[nodes_count];
